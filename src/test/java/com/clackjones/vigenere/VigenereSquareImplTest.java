@@ -74,4 +74,20 @@ public class VigenereSquareImplTest {
 		assertEquals("Did not decipher letter correctly",
 				Character.valueOf('Z'), decipheredLetter);
 	}
+
+	@Test(expected=InvalidCharacterException.class)
+	public void testDecipherLetterDetectInvalidCharacter() throws InvalidCharacterException {
+		Character invalidCharacter = '8';
+		Character encipheredLetter = 'A';
+
+		vigenereSquare.decipherLetter(invalidCharacter, encipheredLetter);
+	}
+
+	@Test(expected=InvalidCharacterException.class)
+	public void testDecipherLetterDetectInvalidCharacter2() throws InvalidCharacterException {
+		Character invalidCharacter = '8';
+		Character keyLetter = 'A';
+
+		vigenereSquare.decipherLetter(keyLetter, invalidCharacter);
+	}
 }
