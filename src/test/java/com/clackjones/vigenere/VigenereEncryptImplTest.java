@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.clackjones.vigenere.exception.InvalidKeyStringException;
+import com.clackjones.vigenere.exception.InvalidKeyException;
 
 public class VigenereEncryptImplTest {
 
@@ -17,7 +17,7 @@ public class VigenereEncryptImplTest {
 	}
 
 	@Test
-	public void testSetKeyString() throws InvalidKeyStringException {
+	public void testSetKeyString() throws InvalidKeyException {
 		String keyString = "THISISAKEY";
 		vigenereEncrypt.setKeyString(keyString);
 
@@ -26,7 +26,7 @@ public class VigenereEncryptImplTest {
 	}
 
 	@Test
-	public void testSetKeyStringToUpperCase() throws InvalidKeyStringException {
+	public void testSetKeyStringToUpperCase() throws InvalidKeyException {
 		String keyString = "thisIsAKey";
 		vigenereEncrypt.setKeyString(keyString);
 
@@ -34,8 +34,8 @@ public class VigenereEncryptImplTest {
 		assertEquals(keyString.toUpperCase(), outKey);
 	}
 
-	@Test(expected=InvalidKeyStringException.class)
-	public void testSetKeyStringInvalidInputString() throws InvalidKeyStringException {
+	@Test(expected=InvalidKeyException.class)
+	public void testSetKeyStringInvalidInputString() throws InvalidKeyException {
 		String keyString = "this is a key string";
 		vigenereEncrypt.setKeyString(keyString);
 	}
