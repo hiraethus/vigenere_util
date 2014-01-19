@@ -28,9 +28,16 @@ public class VigenereSquareImpl implements VigenereSquare {
 		keyLetter = prepareLetter(keyLetter);
 		encipheredLetter = prepareLetter(encipheredLetter);
 
+		int keyLetterNumericValue = (int) keyLetter;
+		int distanceBetweenAAndKey = keyLetterNumericValue - A_NUMERIC_VALUE;
 
+		int indexOfEncipheredLetter = (int) encipheredLetter - A_NUMERIC_VALUE;
+		int indexOfDecipheredLetter = ((indexOfEncipheredLetter - distanceBetweenAAndKey)
+				+ ALPHABET_LENGTH) % ALPHABET_LENGTH;
 
-		return null;
+		Character decipheredLetter = Character.valueOf((char) (A_NUMERIC_VALUE + indexOfDecipheredLetter));
+
+		return decipheredLetter;
 	}
 
 	/**
