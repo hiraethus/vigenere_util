@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.clackjones.vigenere.exception.InvalidCharacterException;
 import com.clackjones.vigenere.exception.InvalidKeyException;
 import com.clackjones.vigenere.exception.InvalidMessageException;
+import com.clackjones.vigenere.exception.KeyNotSetException;
+import com.clackjones.vigenere.exception.MessageNotSetException;
 
 public class VigenereEncryptImpl implements VigenereEncrypt {
 	private String keyString;
@@ -36,7 +38,10 @@ public class VigenereEncryptImpl implements VigenereEncrypt {
 		return this.message;
 	}
 
-	public String encrypt() throws InvalidCharacterException {
+	public String encrypt() throws InvalidCharacterException, MessageNotSetException, KeyNotSetException {
+		if (this.message == null) { throw new MessageNotSetException(); }
+		if (this.keyString == null) { throw new KeyNotSetException(); }
+
 		int messageLength = this.message.length();
 		int keyLength = this.keyString.length();
 		StringBuilder encryptedMessage = new StringBuilder(messageLength);
@@ -53,7 +58,10 @@ public class VigenereEncryptImpl implements VigenereEncrypt {
 		return encryptedMessage.toString();
 	}
 
-	public String decrypt() throws InvalidCharacterException {
+	public String decrypt() throws InvalidCharacterException, MessageNotSetException, KeyNotSetException {
+		if (this.message == null) { throw new MessageNotSetException(); }
+		if (this.keyString == null) { throw new KeyNotSetException(); }
+
 		int messageLength = this.message.length();
 		int keyLength = this.keyString.length();
 		StringBuilder encryptedMessage = new StringBuilder(messageLength);

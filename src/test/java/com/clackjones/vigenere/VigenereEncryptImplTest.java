@@ -8,6 +8,8 @@ import org.junit.Test;
 import com.clackjones.vigenere.exception.InvalidCharacterException;
 import com.clackjones.vigenere.exception.InvalidKeyException;
 import com.clackjones.vigenere.exception.InvalidMessageException;
+import com.clackjones.vigenere.exception.KeyNotSetException;
+import com.clackjones.vigenere.exception.MessageNotSetException;
 
 public class VigenereEncryptImplTest {
 
@@ -65,7 +67,7 @@ public class VigenereEncryptImplTest {
 	}
 
 	@Test
-	public void testEncrypt() throws InvalidMessageException, InvalidKeyException, InvalidCharacterException {
+	public void testEncrypt() throws InvalidMessageException, InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException {
 		String key = "LEMON";
 		String message= "ATTACKATDAWN";
 
@@ -78,8 +80,24 @@ public class VigenereEncryptImplTest {
 		assertEquals(expectedCipherText, cipherText);
 	}
 
+	@Test(expected=MessageNotSetException.class)
+	public void testEncryptMessageThrowsMessageNotSet() throws InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException {
+		vigenereEncrypt = new VigenereEncryptImpl();
+		vigenereEncrypt.setKeyString("KEYSTRING");
+
+		vigenereEncrypt.encrypt();
+	}
+
+	@Test(expected=KeyNotSetException.class)
+	public void testEncryptMessageThrowsKeyNotSet() throws InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException, InvalidMessageException {
+		vigenereEncrypt = new VigenereEncryptImpl();
+		vigenereEncrypt.setMessage("MESSAGEMESSAGEMESSAGE");
+
+		vigenereEncrypt.encrypt();
+	}
+
 	@Test
-	public void testDecrypt() throws InvalidMessageException, InvalidKeyException, InvalidCharacterException {
+	public void testDecrypt() throws InvalidMessageException, InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException {
 		String key = "LEMON";
 		String cipherText = "LXFOPVEFRNHR";
 
@@ -90,5 +108,21 @@ public class VigenereEncryptImplTest {
 		String decrypted = vigenereEncrypt.decrypt();
 
 		assertEquals(expectedDecrypted, decrypted);
+	}
+
+	@Test(expected=MessageNotSetException.class)
+	public void testDecryptMessageThrowsMessageNotSet() throws InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException {
+		vigenereEncrypt = new VigenereEncryptImpl();
+		vigenereEncrypt.setKeyString("KEYSTRING");
+
+		vigenereEncrypt.decrypt();
+	}
+
+	@Test(expected=KeyNotSetException.class)
+	public void testDecryptMessageThrowsKeyNotSet() throws InvalidKeyException, InvalidCharacterException, MessageNotSetException, KeyNotSetException, InvalidMessageException {
+		vigenereEncrypt = new VigenereEncryptImpl();
+		vigenereEncrypt.setMessage("MESSAGEMESSAGEMESSAGE");
+
+		vigenereEncrypt.decrypt();
 	}
 }

@@ -3,6 +3,8 @@ package com.clackjones.vigenere;
 import com.clackjones.vigenere.exception.InvalidCharacterException;
 import com.clackjones.vigenere.exception.InvalidKeyException;
 import com.clackjones.vigenere.exception.InvalidMessageException;
+import com.clackjones.vigenere.exception.KeyNotSetException;
+import com.clackjones.vigenere.exception.MessageNotSetException;
 
 public interface VigenereEncrypt {
 
@@ -34,11 +36,11 @@ public interface VigenereEncrypt {
 	 * Encrypt the message given the set keystring
 	 * @return
 	 */
-	String encrypt() throws InvalidCharacterException;
+	String encrypt() throws KeyNotSetException, MessageNotSetException, InvalidCharacterException;
 
 	/**
 	 * Decrypt the message given the set keystring.
 	 * @return
 	 */
-	String decrypt() throws InvalidCharacterException;
+	String decrypt() throws KeyNotSetException, MessageNotSetException, InvalidCharacterException;
 }
