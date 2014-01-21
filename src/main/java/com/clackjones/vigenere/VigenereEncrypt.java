@@ -27,7 +27,7 @@ public interface VigenereEncrypt {
 	 * @param message
 	 * @return
 	 */
-	String getMessage(String message);
+	String getMessage();
 
 	/**
 	 * Encrypt the message given the set keystring

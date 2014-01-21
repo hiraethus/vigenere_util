@@ -7,6 +7,7 @@ import com.clackjones.vigenere.exception.InvalidMessageException;
 
 public class VigenereEncryptImpl implements VigenereEncrypt {
 	private String keyString;
+	private String message;
 
 	public void setKeyString(String keyString) throws InvalidKeyException {
 		if (!StringUtils.isAlpha(keyString)) {
@@ -21,13 +22,15 @@ public class VigenereEncryptImpl implements VigenereEncrypt {
 	}
 
 	public void setMessage(String message) throws InvalidMessageException {
-		// TODO Auto-generated method stub
+		if (!StringUtils.isAlpha(message)) {
+			throw new InvalidMessageException();
+		}
 
+		this.message = message.toUpperCase();
 	}
 
-	public String getMessage(String message) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getMessage() {
+		return this.message;
 	}
 
 	public String encrypt() {

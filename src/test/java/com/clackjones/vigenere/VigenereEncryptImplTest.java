@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.clackjones.vigenere.exception.InvalidKeyException;
+import com.clackjones.vigenere.exception.InvalidMessageException;
 
 public class VigenereEncryptImplTest {
 
@@ -40,4 +41,26 @@ public class VigenereEncryptImplTest {
 		vigenereEncrypt.setKeyString(keyString);
 	}
 
+	@Test
+	public void testSetMessage() throws InvalidMessageException {
+		String message = "THISISAVALIDMESSAGE";
+		vigenereEncrypt.setMessage(message);
+
+		assertEquals(message, vigenereEncrypt.getMessage());
+	}
+
+	@Test
+	public void testSetMessageCaseInsensitive() throws InvalidMessageException {
+		String message = "thisisavalidmessage";
+		vigenereEncrypt.setMessage(message);
+
+		assertEquals(message.toUpperCase(), vigenereEncrypt.getMessage());
+	}
+
+
+	@Test(expected=InvalidMessageException.class)
+	public void testSetMessageThrowsInvalidMessageException() throws InvalidMessageException {
+		String invalidMessage = "123456";
+		vigenereEncrypt.setMessage(invalidMessage);
+	}
 }
